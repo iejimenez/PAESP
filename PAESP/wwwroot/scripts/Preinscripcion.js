@@ -65,7 +65,11 @@ class InferfazPreinscripcion {
 
     async clickHandlerGuardarPreinscritos()
     {
-        await this.postSavePreinscripto()
+        const result = await this.postSavePreinscripto()
+
+        if (!result.isError) {
+            Swal.fire("Datos registrados correctamente")
+        }
     }
 
 }

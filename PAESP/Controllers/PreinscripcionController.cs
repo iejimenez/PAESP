@@ -16,11 +16,18 @@ namespace PAESP.Controllers
             return View();
         }
 
-        public ActionResult Agregar()
+        public IActionResult Agregar()
         {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult GetPreinscriptos() 
+        {
+            Data dt = Data.GetInstance();
+            List<Usuario> List = dt.ListUsuarios();
+            return Json(List);
+        }
       
         public JsonResult InsertarPreinscripcion()
         {

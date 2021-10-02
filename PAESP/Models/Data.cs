@@ -34,8 +34,47 @@ namespace PAESP.Models
 
         public List<Usuario> Usuarios = new List<Usuario>();
 
+        public void SeedData() 
+        {
+            Usuarios = new List<Usuario>(){
+            new Usuario {
+            
+                Nombres = "Jose alberto",
+                Apeliidos = "Mendoza Brito",
+                TipodeIdentificacion = "Cedula de ciudadania",
+                Cedula = "1065417852",
+                Celular = "",
+                Ciudad = "",
+              
+                },
+            new Usuario {
+            
+                Nombres = "Miguel Angel",
+                Apeliidos = "Restrepo Mejia",
+                TipodeIdentificacion= "Cedula de ciudadania",
+                Cedula = "1065659969",
+                Telefono = "",
+             
+            },
+            new Usuario {             
+                Nombres = "Luis Fernando",
+                Apeliidos = "Jimenez Hernandez",
+                TipodeIdentificacion = "Cedula de ciudadania",
+                Cedula = "1063951753",
+                Telefono = "",
+               
+            },
+            
+        };
+        }
+
         public List<Preinscripcion> Preinscripciones = new List<Preinscripcion>();
-         
+
+        public List<Usuario> ListUsuarios() 
+        {
+            SeedData();
+            return Usuarios;        
+        }
 
         public Usuario getUsuario(string tipo, string identificacion)
         {

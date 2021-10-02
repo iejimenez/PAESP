@@ -10,6 +10,12 @@ namespace PAESP.Controllers
 {
     public class PreinscripcionController : Controller
     {
+        IHttpContextAccessor ica = null;
+        public PreinscripcionController(IHttpContextAccessor contextAccessor)
+        {
+            // save to a field, like _httpContext = contextAccessor.HttpContext;
+            ica = contextAccessor;
+        }
         // GET: Preinscripcion
         public ActionResult Index()
         {
@@ -38,8 +44,8 @@ namespace PAESP.Controllers
                 {
                     Persona = new Usuario()
                     {
-                        TipodeIdentificacion = Request.Form["txtTipoIdentificacion"],
-                        Cedula = Request.Form["txtNroDocumento"],
+                        TipodeIdentificacion = ica.HttpContext.Request.Form["txtTipoIdentificacion"],
+                        Cedula = ica.HttpContext.Request.Form["txtNroDocumento"],
                         Nombres = Request.Form["txtNombres"],
                         Apeliidos = Request.Form["txtApellidos"],
                         Correo = Request.Form["txtEmail"],

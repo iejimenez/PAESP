@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAESP", "PAESP\PAESP.csproj", "{7B62DCE6-E217-47ED-933F-82AC92B5B24D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PAESP", "PAESP\PAESP.csproj", "{7B62DCE6-E217-47ED-933F-82AC92B5B24D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAESP.UnitTest", "PAESP.UnitTest\PAESP.UnitTest.csproj", "{D4343F07-B649-45B2-9C2A-4405EB37F4FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,20 +17,15 @@ Global
 		{7B62DCE6-E217-47ED-933F-82AC92B5B24D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B62DCE6-E217-47ED-933F-82AC92B5B24D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B62DCE6-E217-47ED-933F-82AC92B5B24D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4343F07-B649-45B2-9C2A-4405EB37F4FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4343F07-B649-45B2-9C2A-4405EB37F4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4343F07-B649-45B2-9C2A-4405EB37F4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4343F07-B649-45B2-9C2A-4405EB37F4FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1FC31D91-3ED9-418D-9F70-E41BD790FBCE}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://dev.azure.com/IvanJimenez0876
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = PAESP\\PAESP.csproj
-		SccProjectName1 = PAESP
-		SccLocalPath1 = PAESP
 	EndGlobalSection
 EndGlobal

@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
     window.InferfazPreinscripcion = new InferfazPreinscripcion()
+    window.InferfazPreinscripcion.cargarTabla()
 })
 
 
@@ -36,7 +37,7 @@ class InferfazPreinscripcion {
 
 
     _init() {
-
+        this.tablaPreinscritos = $(`#${this.TABLE}`).DataTable();
 
     }
 
@@ -56,6 +57,24 @@ class InferfazPreinscripcion {
         })
     }
 
-   
+    async cargarTabla()
+    {
+        let listPreinscritos = await this.getListadoPreinscritos();
+
+        for (var i = 0; i < listPreinscritos.length; i++) {
+            const item = listPreinscritos[i];
+            this.tablaPreinscritos.row.add([
+                item.nombres,
+                item.apeliidos,
+                item.tipodeIdentificacion,
+                item.cedula,
+                '',
+                item.ciudad,
+                '',
+                '',
+                ''
+            ]).draw(false)
+        }
+    }
 
 }

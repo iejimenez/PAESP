@@ -29,7 +29,7 @@ class InferfazPreinscripcion {
     }
 
     _initConstants() {       
-        this.API_POST_GUARDAR_PREINSCRIPTOS = '/Preinscripcion/SavePreinscriptos'
+        this.API_POST_GUARDAR_PREINSCRIPTOS = '/Preinscripcion/InsertarPreinscripcion'
         this.FORM_PREINSCRIPCION = 'form_preinscripcion'
     }
 

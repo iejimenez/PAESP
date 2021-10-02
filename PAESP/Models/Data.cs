@@ -46,6 +46,28 @@ namespace PAESP.Models
         public void AddUsuario(Usuario usuario)
         {
             this.Usuarios.Add(usuario);
+            Guid g = Guid.NewGuid();
+            usuario.Id = Guid.NewGuid().ToString();
+        }
+
+        public Preinscripcion getPreinscripcion(string iduser)
+        {
+            return Preinscripciones.Where(p => p.IdPersona == iduser).Select(s => new Preinscripcion() {
+                IdPersona = s.IdPersona, 
+                FechaDePreInscripcion = s.FechaDePreInscripcion,
+                IdPresinscripcion = s.IdPresinscripcion,
+                NumeroRecibo = s.NumeroRecibo,
+                Persona = Usuarios.Where(u=>u.Id == s.IdPersona).FirstOrDefault()
+            }).FirstOrDefault();
+        }
+
+        public void AddPreinscripcion(Preinscripcion preinscripcion)
+        {
+            this.AddUsuario(preinscripcion.Persona);
+            preinscripcion.IdPersona = preinscripcion.Persona.Id;
+            Guid g = Guid.NewGuid();
+            preinscripcion.IdPresinscripcion = Guid.NewGuid().ToString();
+            this.Preinscripciones.Add(preinscripcion);
         }
 
         public void LimpiarUsuario()

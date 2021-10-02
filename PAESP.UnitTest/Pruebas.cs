@@ -25,7 +25,7 @@ namespace PAESP.UnitTest
         {
             Data data = Data.GetInstance();
             Usuario usuario = new Usuario();
-            Assert.AreEqual(true, usuario.Guardar());
+            Assert.AreEqual(false, usuario.Guardar());
         }
 
         [Test]
@@ -39,7 +39,8 @@ namespace PAESP.UnitTest
                 Nombres = "Ivan E",
                 Apeliidos = "Jimenez M", 
                 Celular = "3022964612",
-                Ciudad = "Valledupar"
+                Ciudad = "Valledupar",
+                Correo = "iejimenez01@gmail.com"
             };
             Assert.AreEqual(true, usuario.Guardar());
             Assert.AreEqual(false, usuario.Guardar());

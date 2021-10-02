@@ -51,8 +51,6 @@ class InferfazPreinscripcion {
                 content: "application/json; charset=utf-8",
                 type: 'POST',
                 dataType: "json",
-                contentType: false,
-                processData: false,
                 success: function (data) {
                     resolve(data)
                 },

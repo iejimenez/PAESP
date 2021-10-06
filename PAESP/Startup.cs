@@ -5,12 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PAESP.Models;
 using PAESP.Datos;
 using PAESP.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace PAESP
 {
@@ -29,7 +32,8 @@ namespace PAESP
         {
             services.AddAutoMapper(typeof(Startup));
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            string conexion = Encoding.UTF8.GetString(Convert.FromBase64String(Configuration.GetConnectionString("PAESPConexion")));
+            services.AddDbContext<PaespContext>(options => options.UseSqlServer(conexion));
             services.AddControllersWithViews();
 
             services.AddDbContext<PaespDbContext>(options =>

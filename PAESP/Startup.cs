@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace PAESP
 {
@@ -27,7 +28,8 @@ namespace PAESP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddDbContext<PaespContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PAESPConexion")));
+            string conexion = Encoding.UTF8.GetString(Convert.FromBase64String(Configuration.GetConnectionString("PAESPConexion")));
+            services.AddDbContext<PaespContext>(options => options.UseSqlServer(conexion));
             services.AddControllersWithViews();
         }
 

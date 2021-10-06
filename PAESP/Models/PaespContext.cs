@@ -14,7 +14,6 @@ namespace PAESP.Models
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Estudiante> Estudiantes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

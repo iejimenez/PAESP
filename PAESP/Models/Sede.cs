@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PAESP.Models
 {
-    public class Estudiante
+    public class Sede
     {
-        public int IdEstudiante { get; set; }
-        public DateTime FEchaInscripcion { get; set; }
+        [Key]
+        public string Codigo { get; set; }
 
+        public string NombreSede { get; set; }
 
         public virtual ICollection<Programa> Programas { get; set; }
-
-        public virtual ICollection<Grupo> Grupo { get; set; }
     }
 }

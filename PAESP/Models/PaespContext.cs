@@ -14,10 +14,16 @@ namespace PAESP.Models
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Sede> Sedes { get; set; }
+
+        public DbSet<Programa> Programas { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Usuario>().ToQuery("Usuario");
+            modelBuilder.Entity<Usuario>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }

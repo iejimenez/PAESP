@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -8,6 +10,8 @@ namespace PAESP.Models
 {
     public class Usuario
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public string Cedula { get; set; }
         public string TipodeIdentificacion { get; set; }
@@ -23,6 +27,8 @@ namespace PAESP.Models
         public string Ciudad { get; set; }
 
         public string Correo { get; set; }
+
+        public string Contraseña { get; set; }
 
         public bool Guardar() 
         {

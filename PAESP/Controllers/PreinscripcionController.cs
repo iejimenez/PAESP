@@ -35,7 +35,8 @@ namespace PAESP.Controllers
             return Json(List);
         }
       
-        public JsonResult InsertarPreinscripcion()
+        [HttpPost]
+        public JsonResult InsertarPreinscripcion(IFormCollection collection)
         {
 
             try
@@ -44,13 +45,13 @@ namespace PAESP.Controllers
                 {
                     Persona = new Usuario()
                     {
-                        TipodeIdentificacion = ica.HttpContext.Request.Form["txtTipoIdentificacion"],
-                        Cedula = ica.HttpContext.Request.Form["txtNroDocumento"],
-                        Nombres = Request.Form["txtNombres"],
-                        Apeliidos = Request.Form["txtApellidos"],
-                        Correo = Request.Form["txtEmail"],
-                        Telefono = Request.Form["txtTelefono"],
-                        Celular = Request.Form["txtCiudad"]
+                        TipodeIdentificacion = collection["txtTipoIdentificacion"],
+                        Cedula = collection["txtNroDocumento"],
+                        Nombres = collection["txtNombres"],
+                        Apeliidos = collection["txtApellidos"],
+                        Correo = collection["txtEmail"],
+                        Telefono = collection["txtTelefono"],
+                        Celular = collection["txtCiudad"]
                     }
                 };
 

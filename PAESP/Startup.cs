@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PAESP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PAESP
 {
@@ -25,7 +27,7 @@ namespace PAESP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddDbContext<PaespContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PAESPConexion")));
             services.AddControllersWithViews();
         }
 

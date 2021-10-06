@@ -33,12 +33,12 @@ namespace PAESP
             services.AddAutoMapper(typeof(Startup));
             services.AddRazorPages().AddRazorRuntimeCompilation();
             string conexion = Encoding.UTF8.GetString(Convert.FromBase64String(Configuration.GetConnectionString("PAESPConexion")));
-            services.AddDbContext<PaespContext>(options => options.UseSqlServer(conexion));
+            services.AddDbContext<PaespDbContext>(options => options.UseSqlServer(conexion));
             services.AddControllersWithViews();
 
-            services.AddDbContext<PaespDbContext>(options =>
-             options.UseSqlServer(Configuration["Conexion"]));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ConceptoService>();
+            services.AddTransient<ConfigurationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,13 +13,15 @@ namespace PAESP.Services
     {
         private readonly IMapper _mapper;
         private readonly PaespDbContext _context;
-        public ConceptoService(IMapper mapper)
+        public ConceptoService(IMapper mapper, PaespDbContext contenxt)
         {
             _mapper = mapper;
+            _context = contenxt;
         }
         public List<ConceptoDTO> ListConceptos()
         {
             var Conceptos = _context.Conceptos.ToList();
+            if (true) { } 
 
             return _mapper.Map<List<ConceptoDTO>>(Conceptos);
 

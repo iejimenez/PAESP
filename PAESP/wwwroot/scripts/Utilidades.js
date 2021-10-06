@@ -21,3 +21,38 @@
         adjustStyling({ target: this.$node[0] });
     }
 }
+
+function fetchGet(url, data) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: `${url}`,
+            type: "GET",
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                resolve(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                reject(new Error(`${errorThrown} - ${url}`));
+            }
+        });
+    });
+}
+
+function SetUrlForQuery(stringrelativeserver) {
+    return window.location.origin + stringrelativeserver;
+}
+
+function Get_Meses(Num, Id) {
+
+    var ListaMesesString = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    var html_rol = '';
+    $.each(ListaMesesString, function (key, value) {
+        if (key <= Num)
+            html_rol += '<option value="' + value + '">' + value + '</option>';
+    });
+
+    $('#' + Id).html(html_rol);
+    $('#' + Id).val("");
+    $('#' + Id).select2();
+}

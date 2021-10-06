@@ -19,7 +19,7 @@ namespace PAESP.Datos
         {
         }
 
-
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<TipoIdentificacion> TipoIdentificacions { get; set; }
         public DbSet<Concepto> Conceptos { get; set; }
         public DbSet<Recibo> Recibos { get; set; }

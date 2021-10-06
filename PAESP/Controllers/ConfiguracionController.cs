@@ -12,10 +12,12 @@ namespace PAESP.Controllers
     public class ConfiguracionController : Controller
     {
         private readonly ConfigurationService _configurationService;
-        public ConfiguracionController()
+        public ConfiguracionController(ConfigurationService configurationService)
         {
-
+            _configurationService = configurationService;
         }
+
+        [HttpGet]
         public JsonResult GetTiposIdentificacion()
         {
             AjaxData Retono = new AjaxData();

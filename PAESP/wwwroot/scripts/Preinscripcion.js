@@ -26,15 +26,14 @@ class InferfazPreinscripcion {
         this.$inputTelefono = $('#Telefono')
         this.$inputNombres = $('#txtNombres')
         this.$inputApellidos = $('#txtApellidos')
-        this.$inputPuntaje = $('#txtIcfes')
         this.$btnGenerarRecibo = $('#btnGenerarRecibo')
     }
 
     _initConstants() {       
-        this.API_POST_GUARDAR_PREINSCRIPTOS = '/Preinscripcion/InsertarPreinscripcion'
-        this.API_GET_LISTAR_CONCEPTOS = '/Conceptos/ListarConceptos'
-        this.API_GET_LISTAR_TIPOS_IDENTI = '/Configuracion/GetTiposIdentificacion'
-        this.FORM_PREINSCRIPCION = 'form_preinscripcion'
+        this.API_POST_GUARDAR_PREINSCRIPTOS = SetUrlForQuery('/Preinscripcion/InsertarPreinscripcion')
+        this.API_GET_LISTAR_CONCEPTOS = SetUrlForQuery('/Concepto/ListConceptos')
+        this.API_GET_LISTAR_TIPOS_IDENTI = SetUrlForQuery('/Configuracion/GetTiposIdentificacion')
+        this.FORM_PREINSCRIPCION = SetUrlForQuery('form_preinscripcion')
     }
 
     _initEventBindings() {
@@ -48,10 +47,18 @@ class InferfazPreinscripcion {
     }
 
     async setConceptos() {
-        this.conceptos = await fetchGet(this.API_GET_LISTAR_CONCEPTOS);
+        const result = await fetchGet(this.API_GET_LISTAR_CONCEPTOS);
         let items_html = `<option value="">Seleccionar concepto</option>`
+
+        if (!result.is_Error)
+            this.conceptos = result.objeto        
+        else       
+            this.conceptos = []
+        
         $.each(this.conceptos, (index, item) => {
-            items_html += `<option value="${item.idConcepto}">${item.descripcion}</option>`;
+            if (item.tipoConcepto !== 'MAT') {
+                items_html += `<option value="${item.idConcepto}">${item.descripcion}</option>`;
+            }
         });
 
         $("#cboEntidad").html(items_html);
@@ -59,10 +66,14 @@ class InferfazPreinscripcion {
     }
 
     async setTiposIdentificacion() {
-        this.tiposIdenti = await fetchGet(this.API_GET_LISTAR_TIPOS_IDENTI);
+        const result = await fetchGet(this.API_GET_LISTAR_TIPOS_IDENTI);
         let items_html = `<option value="">Seleccionar entidad</option>`
-        $.each(this.entidades, (index, item) => {
-            items_html += `<option value="${item.IdTipo}">${item.descripcion}</option>`;
+        if (!result.is_Error)
+            this.tiposIdenti = result.objeto
+        else
+            this.tiposIdenti = []
+        $.each(this.tiposIdenti, (index, item) => {
+            items_html += `<option value="${item.idTipo}">${item.descripcion}</option>`;
         });
 
         this.$inputTipoDocumento.html(items_html);

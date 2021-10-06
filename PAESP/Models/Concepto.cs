@@ -9,6 +9,7 @@ namespace PAESP.Models
     {
         public int IdConcepto { get; set; }
         public string CodigoConcepto { get; set; }
+        public string TipoConcepto { get; set; }
         public string Descripcion { get; set; }
         public decimal Costo { get; set; }
         public DateTime FechaInicio { get; set; }

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using PAESP.DTOS;
+using PAESP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,8 @@ namespace PAESP.Helpers
     {
         public AutoMapperProfile()
         {
-
+            CreateMap<Concepto, ConceptoDTO>().ReverseMap();
+            CreateMap<TipoIdentificacion, TiposIdenticacionDTO>().ReverseMap();
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PAESP.Datos;
+using PAESP.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,8 @@ namespace PAESP
             services.AddControllersWithViews();
 
             services.AddDbContext<PaespDbContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
+             options.UseSqlServer(Configuration["Conexion"]));
+            services.AddTransient<ConceptoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

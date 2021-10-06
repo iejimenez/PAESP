@@ -20,12 +20,23 @@ namespace PAESP.Datos
         }
 
 
-        public DbSet<Periodo> Periodos { get; set; }
-        public DbSet<CalendarioAcademico> calendarioAcademicos { get; set; }
+        public DbSet<TipoIdentificacion> TipoIdentificacions { get; set; }
+        public DbSet<Concepto> Conceptos { get; set; }
+        public DbSet<Recibo> Recibos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
-        {
+        {           
+            modelBuilder.Entity<Concepto>(entity => {
+                entity.HasKey(e => e.IdConcepto);
+            });
 
+            modelBuilder.Entity<TipoIdentificacion>(entity => {
+                entity.HasKey(e => e.IdTipo);
+            });
+
+            modelBuilder.Entity<Recibo>(entity => {
+                entity.HasKey(e => e.IdRecibo);
+            });
         }
     }
 }

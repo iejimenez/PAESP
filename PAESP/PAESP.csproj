@@ -9,6 +9,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>81486c6a-86f3-4080-901d-0159ab7e7353</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,10 +21,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DTOS\" />
   </ItemGroup>
 
 </Project>

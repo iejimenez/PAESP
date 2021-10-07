@@ -84,12 +84,12 @@ namespace PAESP.Models
 
         public void AddUsuario(Usuario usuario)
         {
+            Random r = new Random();
             this.Usuarios.Add(usuario);
-            Guid g = Guid.NewGuid();
-            usuario.Id = Guid.NewGuid().ToString();
+            usuario.Id = r.Next();
         }
 
-        public Preinscripcion getPreinscripcion(string iduser)
+        public Preinscripcion getPreinscripcion(int iduser)
         {
             return Preinscripciones.Where(p => p.IdPersona == iduser).Select(s => new Preinscripcion() {
                 IdPersona = s.IdPersona, 

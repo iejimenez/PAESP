@@ -10,6 +10,7 @@ namespace PAESP.Models
     public class GrupoAula
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdGrupoaula { get; set; }
         public string Descripcion { get; set; }
         public int IdAula { get; set; }

@@ -33,6 +33,8 @@ namespace PAESP.Models
 
         public DbSet<GrupoAula> GrupoAulas { get; set; }
 
+        public DbSet<Profesor> Profesores { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>()

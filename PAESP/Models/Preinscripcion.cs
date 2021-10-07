@@ -13,7 +13,7 @@ namespace PAESP.Models
 
         public string NumeroRecibo { get; set; }
 
-        public string IdPersona { get; set; }
+        public int IdPersona { get; set; }
 
         public Usuario Persona { get; set; }
 

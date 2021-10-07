@@ -10,6 +10,7 @@ namespace PAESP.Models
     public class ProgramaMateria
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdProgramaMateria { get; set; }
 
         public int IdPrograma { get; set; }

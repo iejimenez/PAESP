@@ -13,6 +13,7 @@ namespace PAESP.Models
     public class Materia
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdMateria { get; set; }
 
         public string Codigo { get; set; }

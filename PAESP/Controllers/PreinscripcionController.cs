@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PAESP.Clases;
 using PAESP.Models;
+using PAESP.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,12 @@ namespace PAESP.Controllers
     public class PreinscripcionController : Controller
     {
         IHttpContextAccessor ica = null;
-        public PreinscripcionController(IHttpContextAccessor contextAccessor)
+        private readonly PreinscripcionService _preinscripcionService;
+        public PreinscripcionController(IHttpContextAccessor contextAccessor, PreinscripcionService preinscripcionService)
         {
             // save to a field, like _httpContext = contextAccessor.HttpContext;
             ica = contextAccessor;
+            _preinscripcionService = preinscripcionService;
         }
         // GET: Preinscripcion
         public ActionResult Index()
@@ -34,11 +38,33 @@ namespace PAESP.Controllers
             List<Usuario> List = dt.ListUsuarios();
             return Json(List);
         }
-      
+
+        [HttpGet]
+        public JsonResult ListPreinscritos()
+        {
+            AjaxData Retorno = new AjaxData();
+            try { 
+                List<Usuario> usuarios = _preinscripcionService.ListPreinscritos();
+                if (usuarios.Count > 0)
+                {
+                    Retorno.Objeto = usuarios;
+                    Retorno.Is_Error = false;
+                }
+                else
+                {
+                    Retorno.Is_Error = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Retorno.Is_Error = true; ;
+            }
+            return Json(Retorno);
+        }
+
         [HttpPost]
         public JsonResult InsertarPreinscripcion(IFormCollection collection)
         {
-
             try
             {
                 Preinscripcion preinscripcion = new Preinscripcion()
@@ -51,14 +77,17 @@ namespace PAESP.Controllers
                         Apeliidos = collection["txtApellidos"],
                         Correo = collection["txtEmail"],
                         Telefono = collection["txtTelefono"],
-                        Celular = collection["txtCiudad"]
+                        Ciudad = collection["txtCiudad"],
+                        Celular = collection["txtTelefono"]
                     }
                 };
+
+                int idConcepto = int.Parse(collection["txtConcepto"]);
 
                 if (!Preinscripcion.ValidarCampos(preinscripcion)) 
                     return Json(new { isError = true, msj = "Campos incompletos" });
 
-                if (preinscripcion.Guardar())
+                if (!_preinscripcionService.SavePreinscripcion(preinscripcion, idConcepto))
                 {
                     return Json(new { isError = false, msj = "Generado correctamente." });
                 }else

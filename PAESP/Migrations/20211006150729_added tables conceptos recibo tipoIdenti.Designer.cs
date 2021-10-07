@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PAESP.Datos;
 
 namespace PAESP.Migrations
 {
     [DbContext(typeof(PaespDbContext))]
-    partial class PaespContextModelSnapshot : ModelSnapshot
+    [Migration("20211006150729_added tables conceptos recibo tipoIdenti")]
+    partial class addedtablesconceptosrecibotipoIdenti
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,9 +42,6 @@ namespace PAESP.Migrations
 
                     b.Property<DateTime>("FechaInicio")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("TipoConcepto")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdConcepto");
 

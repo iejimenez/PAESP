@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@section scripts{
+    <script src="~/Scripts/CalendarioAcademico.js" type="module"></script>
+}
+
+<div class="modal fade" id="modalAddCalendar" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Guardar calendario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form_add_calendar">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 control-label">Periodo</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="txtPeriodo" name="txtPeriodo"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 control-label">Descripción</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="txtDescripcion" name="txtDescripcion" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 control-label">Fecha Inicio</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="txtFechaInicio" name="txtFechaInicio" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 control-label">Fecha Fin</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="txtFechaFin" name="txtFechaFin" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 control-label">Semestre</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="txtSemestre" name="txtSemestre">
+                                <option value="">Seleccione el semestre academico</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 control-label">Año academico</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="txtAcademicYear" name="txtAcademicYear" />
+                        </div>
+                    </div>
+
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSaveCalendar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header ">
+                <div class="card-title row justify-content-between">
+                    <h1>Calendarios Academicos</h1>
+                    <button type="button" id="btnNewCalendar" class="btn btn-primary" data-toggle="modal" data-target="#modalAddCalendar">Nuevo</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <table class="table" id="datatable_calendario"  style="background-color: #FFF;">
+                            <thead style="background-color: #23AF66; color: #fff;">
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Periodo</th>
+                                    <th>Fecha inicio</th>
+                                    <th>Fecha final</th>
+                                    <th>Semestre</th>
+                                    <th>Año academico</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -27,7 +27,8 @@ class InferfazPreinscripcion {
     }
 
     _initConstants() {
-        this.API_GET_LISTADO_PREINSCRIPTOS = '/Preinscripcion/GetPreinscriptos'
+        //this.API_GET_LISTADO_PREINSCRIPTOS = '/Preinscripcion/GetPreinscriptos'
+        this.API_GET_LISTADO_PREINSCRIPTOS = SetUrlForQuery('/Preinscripcion/ListPreinscritos')
         this.TABLE = 'table_preinscripcion'
     }
 

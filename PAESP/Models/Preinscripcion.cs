@@ -13,36 +13,36 @@ namespace PAESP.Models
 
         public string NumeroRecibo { get; set; }
 
-        public string IdPersona { get; set; }
+        public int IdPersona { get; set; }
 
         public Usuario Persona { get; set; }
 
-        public bool Guardar()
-        {
-            if (!Preinscripcion.ValidarCampos(this))
-                return false;
+        //public bool Guardar()
+        //{
+        //    if (!Preinscripcion.ValidarCampos(this))
+        //        return false;
 
-            Data data = Data.GetInstance();
-            Usuario usuario = data.getUsuario(this.Persona.TipodeIdentificacion, this.Persona.Cedula);
-            if (usuario != null)
-            {
-                Preinscripcion p = data.getPreinscripcion(usuario.Id);
-                if(p == null)
-                {
-                    data.AddPreinscripcion(p);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
+        //    Data data = Data.GetInstance();
+        //    Usuario usuario = data.getUsuario(this.Persona.TipodeIdentificacion, this.Persona.Cedula);
+        //    if (usuario != null)
+        //    {
+        //        Preinscripcion p = data.getPreinscripcion(usuario.Id);
+        //        if(p == null)
+        //        {
+        //            data.AddPreinscripcion(p);
+        //            return true;
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
 
-        }
+        //}
 
         public static bool ValidarCampos(Preinscripcion preinscripcion)
         {

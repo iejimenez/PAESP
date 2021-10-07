@@ -23,6 +23,10 @@ namespace PAESP.Datos
         public DbSet<TipoIdentificacion> TipoIdentificacions { get; set; }
         public DbSet<Concepto> Conceptos { get; set; }
         public DbSet<Recibo> Recibos { get; set; }
+        public DbSet<Preinscripcion> Preinscripcions { get; set; }
+        public DbSet<Configuraciones> configuraciones { get; set; }
+        public DbSet<Estado> Estados { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {           
@@ -36,6 +40,24 @@ namespace PAESP.Datos
 
             modelBuilder.Entity<Recibo>(entity => {
                 entity.HasKey(e => e.IdRecibo);
+            });
+
+            modelBuilder.Entity<Preinscripcion>(entity => {
+                entity.HasKey(e => e.IdPresinscripcion);
+           
+            });
+
+            modelBuilder.Entity<Configuraciones>(entity => {
+                entity.HasKey(e => e.IdConfig);
+            });
+
+            modelBuilder.Entity<Usuario>(entity => {
+                entity.HasKey(e => e.IdUsuario);
+
+            });
+
+            modelBuilder.Entity<Estado>(entity => {
+                entity.HasKey(e => e.IdEstado);
             });
         }
     }

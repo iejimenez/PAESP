@@ -8,7 +8,8 @@ namespace PAESP.Models
 {
     public class Usuario
     {
-        public string Id { get; set; }
+        public int IdUsuario { get; set; }
+        //public int Id { get; set; }
         public string Cedula { get; set; }
         public string TipodeIdentificacion { get; set; }
 

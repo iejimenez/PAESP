@@ -86,7 +86,7 @@ namespace PAESP.Models
         {
             Random r = new Random();
             this.Usuarios.Add(usuario);
-            usuario.Id = r.Next();
+            usuario.IdUsuario = r.Next();
         }
 
         //public Preinscripcion getPreinscripcion(string iduser)

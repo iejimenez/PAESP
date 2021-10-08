@@ -27,6 +27,8 @@ namespace PAESP.Datos
         public DbSet<Configuraciones> configuraciones { get; set; }
         public DbSet<Estado> Estados { get; set; }
 
+        public DbSet<Estudiante> Estudiantes {get;set;}
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {           
@@ -58,6 +60,13 @@ namespace PAESP.Datos
 
             modelBuilder.Entity<Estado>(entity => {
                 entity.HasKey(e => e.IdEstado);
+            });
+
+            modelBuilder.Entity<Estudiante>(student =>
+            {
+                student.HasKey(e => e.IdEstudiante);
+                student.HasOne<Usuario>("IdUsuario");
+
             });
         }
     }

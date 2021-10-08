@@ -12,7 +12,7 @@ namespace PAESP.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int IdUsuario { get; set; }
         public string Cedula { get; set; }
         public string TipodeIdentificacion { get; set; }
 

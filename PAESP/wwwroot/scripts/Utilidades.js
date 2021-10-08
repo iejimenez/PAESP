@@ -180,7 +180,8 @@ function ShowLoading(reset) {
             allowOutsideClick: false,
             allowEscapeKey: false,
             background: 'transparent ',
-
+            showConfirmButton: false,
+            confrimButtonClass: "d-none",
             onBeforeOpen: () => {
                 Swal.showLoading();
             }
@@ -192,7 +193,8 @@ function ShowLoading(reset) {
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 background: 'transparent ',
-
+                showConfirmButton: false,
+                confrimButtonClass: "d-none",
                 onBeforeOpen: () => {
                     Swal.showLoading();
                 }

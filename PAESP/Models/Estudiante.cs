@@ -19,7 +19,6 @@ namespace PAESP.Models
 
         [ForeignKey("IdUsuario")]
         public virtual Usuario  Usuario { get; set; }
-        public ICollection<Programa> Programas { get; set; }
 
         public  ICollection<GrupoEstudiante> Grupos { get; set; }
     }

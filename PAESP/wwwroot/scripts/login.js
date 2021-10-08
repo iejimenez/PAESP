@@ -55,7 +55,7 @@
             const result = await this.postAutenticate();
             CloseLoading();
             if (!result.Is_Error) {
-               
+                window.location.href = '/Home/Index';
             } else {
                 swal.fire({
                     title: "¡Error!",
@@ -78,9 +78,7 @@
                 content: "application/json; charset=utf-8",
                 type: "POST",
                 dataType: "json",
-                data: this.login,
-                contentType: false,
-                processData: false,
+                data: { "login": this.login },
                 success: function (data) {
                     resolve(data);
                 },

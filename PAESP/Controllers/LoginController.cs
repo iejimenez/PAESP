@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PAESP.Clases;
 using PAESP.Datos;
@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace PAESP.Controllers
 {
@@ -43,7 +45,8 @@ namespace PAESP.Controllers
                 {
                     retorno.Is_Error = false;
                     retorno.Msj = "OK";
-                    Redirect("/Home");
+                    user.Contraseña = "";
+                    HttpContext.Session.SetString("User", JsonConvert.SerializeObject(user));
                 }
                 else
                 {

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PAESP.Datos;
-using PAESP.DTOS;
 using PAESP.Models;
 using System;
 using System.Collections.Generic;
@@ -10,23 +9,22 @@ using System.Threading.Tasks;
 
 namespace PAESP.Services
 {
-    public class ConfigurationService
+    public class ReciboService
     {
         private readonly IMapper _mapper;
         private readonly PaespDbContext _context;
-        public ConfigurationService(PaespDbContext context, IMapper mapper)
+        public ReciboService(PaespDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-        public List<TiposIdenticacionDTO> ListTiposIdentificacion()
+
+        public Recibo GetRecibo(int id)
         {
-            var tiposIdenti = _context.TipoIdentificacions.ToList();
-
-            return _mapper.Map<List<TiposIdenticacionDTO>>(tiposIdenti);
-
+            Recibo rec = _context.Recibos
+                .Include(w => w.Concepto)
+                .FirstOrDefault(f => f.IdRecibo == id);
+            return rec;
         }
     }
-
-
 }

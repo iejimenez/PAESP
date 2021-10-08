@@ -44,6 +44,10 @@ namespace PAESP.Datos
 
             modelBuilder.Entity<Recibo>(entity => {
                 entity.HasKey(e => e.IdRecibo);
+
+                entity.HasOne(d => d.Concepto)
+                   .WithMany(p => p.Recibos)
+                   .HasForeignKey(d => d.IdConcepto);
             });
 
             modelBuilder.Entity<Preinscripcion>(entity => {
@@ -53,6 +57,7 @@ namespace PAESP.Datos
 
             modelBuilder.Entity<Configuraciones>(entity => {
                 entity.HasKey(e => e.IdConfig);
+
             });
 
             modelBuilder.Entity<Usuario>(entity => {

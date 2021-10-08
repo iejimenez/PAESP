@@ -53,6 +53,7 @@ namespace PAESP
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ConceptoService>();
             services.AddTransient<ConfigurationService>();
+            services.AddTransient<ReciboService>();
             services.AddTransient<PreinscripcionService>();
 
             StaticServiceProvider.GenerarProveedor(services);

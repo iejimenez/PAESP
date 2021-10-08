@@ -41,11 +41,35 @@ namespace PAESP.Controllers
         }
 
         [HttpGet]
-        public JsonResult ListPreinscritos()
+        public JsonResult ListPreinscritosPendientes()
         {
             AjaxData Retorno = new AjaxData();
             try { 
-                List<Usuario> usuarios = _preinscripcionService.ListPreinscritos();
+                List<Usuario> usuarios = _preinscripcionService.ListPreinscritosPendientes();
+                if (usuarios.Count > 0)
+                {
+                    Retorno.Objeto = usuarios;
+                    Retorno.Is_Error = false;
+                }
+                else
+                {
+                    Retorno.Is_Error = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Retorno.Is_Error = true; ;
+            }
+            return Json(Retorno);
+        }
+
+        [HttpGet]
+        public JsonResult ListPreinscritosPagos()
+        {
+            AjaxData Retorno = new AjaxData();
+            try
+            {
+                List<Usuario> usuarios = _preinscripcionService.ListPreinscritosPagados();
                 if (usuarios.Count > 0)
                 {
                     Retorno.Objeto = usuarios;
@@ -90,7 +114,7 @@ namespace PAESP.Controllers
                 AjaxData result = _preinscripcionService.SavePreinscripcion(preinscripcion, idConcepto);
                 if (!result.Is_Error)
                 {
-                    return Json(new { isError = false, result = result.Objeto, msj = "Generado correctamente." });
+                    return Json(new { isError = false, objeto = result.Objeto, msj = "Generado correctamente." });
                 }else
                     return Json(new { isError = true, msj = "Ha ocurrido un error inesperado." });
 

@@ -42,8 +42,10 @@ class InferfazPreinscripcion {
 
 
     async _init() {
+        ShowLoading()
         await this.setConceptos()
         await this.setTiposIdentificacion();
+        CloseLoading();
     }
 
     async setConceptos() {

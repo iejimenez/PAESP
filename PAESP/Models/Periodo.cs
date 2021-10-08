@@ -10,5 +10,8 @@ namespace PAESP.Models
 
         public int IdPeriodo { get; set; }
         public string Descripcion { get; set; }
+        public int Unidad { get; set; }
+
+        public List<CalendarioAcademico> CalendarioAcademicos { get; set; }
     }
 }

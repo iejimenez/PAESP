@@ -16,6 +16,7 @@ class InterfazCalendarios {
         this._init()
 
         modalAddCalendar = new ModalAddCalendario();
+        modalAddCalendar.parent = this
     }
 
     _initHtmlIds() {
@@ -24,7 +25,7 @@ class InterfazCalendarios {
     }
 
     _initConstants() {
-       
+        this.API_GET_LIST_CALENDARS = SetUrlForQuery("/CalendarioAcademico/ListCalendarios")
         this.TABLE = 'datatable_calendario'
     }
 
@@ -32,11 +33,51 @@ class InterfazCalendarios {
     }
 
 
-    _init() {
+    async _init() {
         this.tablaCalendario = $(`#${this.TABLE}`).DataTable();
-
+        await this.listCalendarios();
     }
 
+    async getCalendars()
+    {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: this.API_GET_LIST_CALENDARS,
+                type: 'GET',
+                dataType: "json",
+                success: function (data) {
+                    resolve(data)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    reject(new Error(`${errorThrown} - ${this.API_GET_LIST_CALENDARS}`))
+                }
+            })
+        })
+    }
+
+    async cargarTabla(calendarios)
+    {           
+        for (var i = 0; i < calendarios.length; i++) {           
+            this.tablaCalendario.row.add([
+                item.descripcion,
+                item.periodo.descripcion,
+                item.tipodeIdentificacion,
+                item.fechaInicio,
+                item.fechaFinal,
+                item.semestre,
+                item.academicYear,
+            ]).draw(false)
+        }        
+    }
+
+    async listCalendarios()
+    {
+        const result = await this.getCalendars()
+        if (!result.is_Error) {
+            this.cargarTabla(result.objeto)
+        }
+
+    }
   
 }
 
@@ -45,6 +86,7 @@ class ModalAddCalendario {
     constructor() {
         this._initConstants()
         this._initHtmlIds()
+        this.clickSaveCalendarHandler = this.clickSaveCalendarHandler.bind(this)
         this._initEventBindings();
         this._init()
     }
@@ -73,8 +115,13 @@ class ModalAddCalendario {
       
     }
 
+    _initStyles()
+    {
+        $('.form-control-uniform').uniform();
+    }
+
     _init() {
-       
+        this.__initStyles();
         this._initDatePickers()
     }
 
@@ -92,10 +139,32 @@ class ModalAddCalendario {
                     resolve(data)
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    reject(new Error(`${errorThrown} - ${this.API_POST_GUARDAR_PREINSCRIPTOS}`))
+                    reject(new Error(`${errorThrown} - ${this.API_POST_CALENDARIO}`))
                 }
             })
         })
+       
+    }
+
+    async clickSaveCalendarHandler() {
+        const result = await this.postSaveCalendario()
+        if (!result.isError) {
+            swal.fire({
+                title: "¡Success!",
+                text: result.msj,
+                confirmButtonClass: "btn btn-success",
+                type: "success"
+            });
+            await this.parent.listCalendarios();
+        }
+        else {
+            swal.fire({
+                title: "¡Error!",
+                text: result.msj,
+                confirmButtonClass: "btn-primary",
+                type: "Error"
+            });
+        }
     }
 }
 

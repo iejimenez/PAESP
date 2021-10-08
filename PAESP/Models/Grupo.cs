@@ -13,12 +13,16 @@ namespace PAESP.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdGrupo { get; set; }
 
+        [Required]
         public string Nombre { get; set; }
 
+        [Required]
         public int Cupo { get; set; }
 
+        [Required]
         public int IdMateria { get; set; }
 
+        [Required]
         public int IdProfesor { get; set; }
 
         [ForeignKey("IdMateria")]
@@ -29,6 +33,6 @@ namespace PAESP.Models
 
         public ICollection<GrupoAula> Horaio {get;set;}
 
-        public ICollection<Estudiante> Estudiantes { get; set; }
+        public ICollection<GrupoEstudiante> Estudiantes { get; set; }
     }
 }

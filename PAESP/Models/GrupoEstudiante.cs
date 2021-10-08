@@ -13,7 +13,9 @@ namespace PAESP.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdGrupoEstudiante { get; set; }
 
+        [Required]
         public int IdGrupo { get; set; }
+        [Required]
         public int IdEstudiante { get; set; }
 
         public double PrimerCorte { get; set; }

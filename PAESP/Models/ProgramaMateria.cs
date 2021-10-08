@@ -13,11 +13,11 @@ namespace PAESP.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdProgramaMateria { get; set; }
 
-        public int IdPrograma { get; set; }
+        public string CodigoPrograma { get; set; }
 
         public int IdMateria { get; set; }
 
-        [ForeignKey("IdPrograma")]
+        [ForeignKey("CodigoPrograma")]
         public virtual Programa Programa { get; set; }
 
         [ForeignKey("IdMateria")]

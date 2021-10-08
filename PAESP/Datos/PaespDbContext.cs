@@ -31,7 +31,9 @@ namespace PAESP.Datos
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
-        {           
+        {
+
+
             modelBuilder.Entity<Concepto>(entity => {
                 entity.HasKey(e => e.IdConcepto);
             });
@@ -65,9 +67,32 @@ namespace PAESP.Datos
             modelBuilder.Entity<Estudiante>(student =>
             {
                 student.HasKey(e => e.IdEstudiante);
-                student.HasOne<Usuario>("IdUsuario");
+                student.HasOne<Usuario>("Usuario")
+                .WithMany()
+                .HasForeignKey("IdUsuario");
 
             });
+
+            modelBuilder.Entity<GrupoEstudiante>()
+                .HasOne<Grupo>()
+                .WithMany(e=>e.Estudiantes)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<GrupoEstudiante>()
+                .HasOne<Estudiante>()
+                .WithMany(g => g.Grupos)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            
+            modelBuilder.Entity<Estudiante>()
+                .HasMany<GrupoEstudiante>()
+                .WithOne(e=>e.Estudiante)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Grupo>()
+               .HasMany<GrupoEstudiante>()
+               .WithOne(g=>g.Grupo)
+               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

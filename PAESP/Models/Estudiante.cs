@@ -14,12 +14,13 @@ namespace PAESP.Models
         public int IdEstudiante { get; set; }
         public DateTime FEchaInscripcion { get; set; }
 
+        [Required]
         public int IdUsuario { get; set; }
 
         [ForeignKey("IdUsuario")]
         public virtual Usuario  Usuario { get; set; }
         public ICollection<Programa> Programas { get; set; }
 
-        public  ICollection<Grupo> Grupo { get; set; }
+        public  ICollection<GrupoEstudiante> Grupos { get; set; }
     }
 }

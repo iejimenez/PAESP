@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PAESP.Datos;
 using PAESP.DTOS;
 using PAESP.Models;
@@ -27,17 +28,5 @@ namespace PAESP.Services
         }
     }
 
-    public class ReciboService
-    {
-        private readonly IMapper _mapper;
-        private readonly PaespDbContext _context;
-        public ReciboService(PaespDbContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
-
-      
-    }
 
 }

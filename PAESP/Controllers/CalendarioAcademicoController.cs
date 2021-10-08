@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PAESP.Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,23 @@ namespace PAESP.Controllers
         public JsonResult ListCalendarios() 
         {
             return Json("");
+        }
+
+        [HttpPost]
+        public JsonResult SaveCalendario() 
+        {
+            AjaxData Retorno = new AjaxData();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+
+            }
+            return Json(Retorno);
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using PAESP.DTOS;
 using PAESP.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +23,8 @@ namespace PAESP.Controllers
 
         public IActionResult Index()
         {
+            UsuarioDto user = JsonConvert.DeserializeObject<UsuarioDto>(HttpContext.Session.GetString("User"));
+            ViewBag.Nombre = user.Nombres;
             return View();
         }
 

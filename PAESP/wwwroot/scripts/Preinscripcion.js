@@ -42,8 +42,10 @@ class InferfazPreinscripcion {
 
 
     async _init() {
+        ShowLoading()
         await this.setConceptos()
         await this.setTiposIdentificacion();
+        CloseLoading();
     }
 
     async setConceptos() {
@@ -112,6 +114,7 @@ class InferfazPreinscripcion {
                 confirmButtonClass: "btn btn-success",
                 type: "success"
             });
+            DescargarPDF("PREINSCRIPCION", result.objeto);
         }
         else
         {

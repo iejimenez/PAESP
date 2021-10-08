@@ -20,10 +20,10 @@ namespace PAESP.Services
             _context = contenxt;
         }
 
-        public List<Usuario> ListPreinscritos()
+        public List<Usuario> ListPreinscritosPendientes()
         {
             List<Recibo> recibos = _context.Recibos
-                .Where(w => w.IdConcepto == 1 && w.Estado == 2)
+                .Where(w => w.IdConcepto == 1 && w.Estado == 3)
                 .ToList();
             List<string> cedulas = recibos.Select(s => s.Identificacion).ToList();
 
@@ -35,16 +35,31 @@ namespace PAESP.Services
 
         }
 
-        public bool SavePreinscripcion(Preinscripcion pre, int idConcepto)
+        public List<Usuario> ListPreinscritosPagados()
         {
-            bool result = false;
+            List<Recibo> recibos = _context.Recibos
+                .Where(w => w.IdConcepto == 1 && w.Estado == 4)
+                .ToList();
+            List<string> cedulas = recibos.Select(s => s.Identificacion).ToList();
+
+            //List<Usuario> pres = new List<Usuario>();
+            List<Usuario> pres = _context.Usuarios
+                .Where(w => cedulas.Contains(w.Cedula)).ToList();
+
+            return pres;
+
+        }
+
+        public AjaxData SavePreinscripcion(Preinscripcion pre, int idConcepto)
+        {
+            AjaxData result = new AjaxData();
             using var transaction = _context.Database.BeginTransaction();
             try
             {
                 Recibo recibo = new Recibo();
                 Concepto concepto = _context.Conceptos.FirstOrDefault(f => f.IdConcepto == idConcepto);
                 Configuraciones config = _context.configuraciones.FirstOrDefault(f => f.Codigo == "200");
-                Estado estado = _context.Estados.FirstOrDefault(f => f.NombreEstado == "PAGADO");               
+                Estado estado = _context.Estados.FirstOrDefault(f => f.NombreEstado == "PENDIENTE");               
 
                 recibo.NroRecibo = Consecutivos.ConsecutivoByCodigo(8, "200", config);
                 recibo.IdConcepto = concepto.IdConcepto;
@@ -53,6 +68,7 @@ namespace PAESP.Services
                 recibo.FechaPago = new DateTime(2021, 10, 31);
                 recibo.Estado = estado.IdEstado;
                 recibo.FechaReg = DateTime.Now;
+                recibo.Valor = concepto.Costo;
 
                 _context.Recibos.Add(recibo);
                 _context.Usuarios.Add(pre.Persona);
@@ -67,11 +83,14 @@ namespace PAESP.Services
                 _context.SaveChanges();
 
                 transaction.Commit();
+
+                result.Objeto = recibo.IdRecibo;
+                result.Is_Error = false;
             }
             catch (Exception ex)
             {
                 transaction.Rollback();
-                result = true;
+                result.Is_Error = true;
             }
 
             return result;

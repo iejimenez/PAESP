@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +9,9 @@ namespace PAESP.Models
 {
     public class Preinscripcion
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public string IdPresinscripcion { get;set; }
 
         public DateTime FechaDePreInscripcion { get; set; }

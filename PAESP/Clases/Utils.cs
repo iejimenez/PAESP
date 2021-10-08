@@ -1,4 +1,6 @@
-﻿using PAESP.Models;
+﻿using Microsoft.AspNetCore.Http;
+using PAESP.DTOS;
+using PAESP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,7 @@ namespace PAESP.Clases
 {
     public class Utils
     {
+        
     }
     public static class Consecutivos
     {

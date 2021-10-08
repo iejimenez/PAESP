@@ -58,6 +58,12 @@ function Get_Meses(Num, Id) {
 }
 
 
+function DescargarPDF(tipo, id) {
+    var formURL = '/report/generate?tipo=' + tipo + "&Id=" + id;
+    window.open(formURL, "_black");
+}
+
+
 
 function Validador(idform, rules, mensajes, onlyOnSubmit = false) {
 
@@ -174,7 +180,8 @@ function ShowLoading(reset) {
             allowOutsideClick: false,
             allowEscapeKey: false,
             background: 'transparent ',
-
+            showConfirmButton: false,
+            confrimButtonClass: "d-none",
             onBeforeOpen: () => {
                 Swal.showLoading();
             }
@@ -186,7 +193,8 @@ function ShowLoading(reset) {
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 background: 'transparent ',
-
+                showConfirmButton: false,
+                confrimButtonClass: "d-none",
                 onBeforeOpen: () => {
                     Swal.showLoading();
                 }

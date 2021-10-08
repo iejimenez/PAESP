@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PAESP", "PAESP\PAESP.csproj", "{7B62DCE6-E217-47ED-933F-82AC92B5B24D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAESP.UnitTest", "PAESP.UnitTest\PAESP.UnitTest.csproj", "{D4343F07-B649-45B2-9C2A-4405EB37F4FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PAESP.UnitTest", "PAESP.UnitTest\PAESP.UnitTest.csproj", "{D4343F07-B649-45B2-9C2A-4405EB37F4FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -13,7 +13,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using System.Text;
+using PAESP.Clases;
 
 namespace PAESP
 {
@@ -43,11 +46,17 @@ namespace PAESP
                 options.Cookie.IsEssential = true;
             });
 
+            services.AddSingleton(typeof(IConverter),
+                new SynchronizedConverter(new PdfTools()));
+            services.AddTransient<IReportService, ReportService>();
             services.AddControllersWithViews();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ConceptoService>();
             services.AddTransient<ConfigurationService>();
+            services.AddTransient<ReciboService>();
             services.AddTransient<PreinscripcionService>();
+
+            StaticServiceProvider.GenerarProveedor(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

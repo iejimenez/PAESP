@@ -14,6 +14,8 @@ namespace PAESP.Helpers
         {
             CreateMap<Concepto, ConceptoDTO>().ReverseMap();
             CreateMap<TipoIdentificacion, TiposIdenticacionDTO>().ReverseMap();
+            CreateMap<Usuario, UsuarioDto>().ReverseMap();
+
         }
     }
 }

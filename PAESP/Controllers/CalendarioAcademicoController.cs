@@ -64,7 +64,7 @@ namespace PAESP.Controllers
 
                 int idConcepto = int.Parse(collection["txtConcepto"]);
               
-                AjaxData result = _calendarioService.SaveCalendario(calendario,);
+                AjaxData result = _calendarioService.SaveCalendario(calendario);
                 if (!result.Is_Error)
                 {
                     return Json(new { isError = false, msj = "Calendario academico registrado correctamente." });

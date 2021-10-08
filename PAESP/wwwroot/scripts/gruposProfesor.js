@@ -76,11 +76,11 @@
         }
 
         RenderTable(this.TABLE_CURSOS, [0, 1, 2, 3], [
-            { data: 'Materia.Codigo', className: "dt-center", },
-            { data: 'Materia.Nombre', className: "dt-center", },
-            { data: 'Nombre', className: "dt-center" },
+            { data: 'materia.codigo', className: "dt-center", },
+            { data: 'materia.nombre', className: "dt-center", },
+            { data: 'nombre', className: "dt-center" },
             {
-                data: 'IdGrupo', className: "dt-center", render: (data, type, row, meta) => {
+                data: 'idGrupo', className: "dt-center", render: (data, type, row, meta) => {
                   
                     return "<div class='list-icons'>" +
                         "<a class='showEditNotas' id='showEditNotas" + meta.row + "' data-idx='" + meta.row + "' data-popup='tooltip' title='Ver detalle'><i  data-idx='" + meta.row + "'class='text-link-primary icon-certificate'></i></a>" +

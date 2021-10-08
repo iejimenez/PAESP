@@ -33,6 +33,11 @@ namespace PAESP.Controllers
             UsuarioDto user = JsonConvert.DeserializeObject<UsuarioDto>(HttpContext.Session.GetString("User"));
             int idprofesor = _context.GetProfesorByIdUser(user.IdUsuario).IdProfesor;
             List<GrupoDto> grupos = _mapper.Map<List<GrupoDto>>(_context.GetGruposByProfesor(idprofesor));
+
+            foreach(GrupoDto gp in grupos)
+            {
+                gp.Materia = _mapper.Map<MateriaDto>(_context.GetMateria(gp.IdMateria)); 
+            }
             return Json(grupos);
         }
     }

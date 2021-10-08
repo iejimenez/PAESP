@@ -41,6 +41,9 @@ namespace PAESP.Datos
 
         public DbSet<GrupoEstudiante> GrupoEstudiantes { get; set; }
 
+        public DbSet<Materia> Materias { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -152,5 +155,11 @@ namespace PAESP.Datos
 
             return grupos;
         } 
+
+        public Materia GetMateria(int idmateria)
+        {
+            Materia materia = this.Materias.Where(m => m.IdMateria == idmateria).FirstOrDefault();
+            return materia;
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace PAESP.Models
         public int EstadoMatricula { get; set; }
 
         public CalendarioAcademico CalendarioAcademico { get; set; }
+        public Estudiante Estudiante { get; set; }
 
     }
 }

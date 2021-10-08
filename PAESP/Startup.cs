@@ -55,6 +55,7 @@ namespace PAESP
             services.AddTransient<ConfigurationService>();
             services.AddTransient<ReciboService>();
             services.AddTransient<PreinscripcionService>();
+            services.AddTransient<CalendarioService>();
 
             StaticServiceProvider.GenerarProveedor(services);
         }

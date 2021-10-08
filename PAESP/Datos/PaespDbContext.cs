@@ -26,6 +26,8 @@ namespace PAESP.Datos
         public DbSet<Preinscripcion> Preinscripcions { get; set; }
         public DbSet<Configuraciones> configuraciones { get; set; }
         public DbSet<Estado> Estados { get; set; }
+        public DbSet<Periodo> Periodos { get; set; }
+        public DbSet<CalendarioAcademico> CalendarioAcademicos { get; set; }
 
         public DbSet<Estudiante> Estudiantes { get; set; }
 
@@ -83,6 +85,21 @@ namespace PAESP.Datos
                 student.HasOne<Usuario>("Usuario")
                 .WithMany()
                 .HasForeignKey("IdUsuario");
+
+            });
+
+            modelBuilder.Entity<Periodo>(periodo =>
+            {
+                periodo.HasKey(e => e.IdPeriodo);
+            });
+
+            modelBuilder.Entity<CalendarioAcademico>(calendario =>
+            {
+                calendario.HasKey(e => e.IdCalendarioAcademico);
+
+                calendario.HasOne(d => d.Periodo)
+                 .WithMany(p => p.CalendarioAcademicos)
+                 .HasForeignKey(d => d.IdCalendarioAcademico);
 
             });
 

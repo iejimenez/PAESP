@@ -15,6 +15,6 @@ namespace PAESP.Models
         public string Semestre { get; set; }
         public int academicYear { get; set; }
 
-        public List<Matricula> Matriculas { get; set; }
+        public Periodo Periodo { get; set; }
     }
 }

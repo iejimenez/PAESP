@@ -56,9 +56,11 @@ class ModalAddCalendario {
   
     }
 
-    _initConstants() {
-
+    _initConstants()
+    {
+        this.API_POST_CALENDARIO = SetUrlForQuery("/CalendarioAcademico/SaveCalendario")
         this.MODAL = 'modalAddCalendar'
+        this.FORM_CALENDARIO = 'form_add_calendar'
     }
 
     _initEventBindings() {
@@ -75,6 +77,25 @@ class ModalAddCalendario {
        
         this._initDatePickers()
     }
-    
+
+    postSaveCalendario() {
+        let params = $(`#${this.FORM_CALENDARIO}`).serialize()
+
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: this.API_POST_CALENDARIO,
+                content: "application/json; charset=utf-8",
+                type: 'POST',
+                dataType: "json",
+                data: params,
+                success: function (data) {
+                    resolve(data)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    reject(new Error(`${errorThrown} - ${this.API_POST_GUARDAR_PREINSCRIPTOS}`))
+                }
+            })
+        })
+    }
 }
 

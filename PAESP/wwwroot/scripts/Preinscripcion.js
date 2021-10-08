@@ -112,6 +112,7 @@ class InferfazPreinscripcion {
                 confirmButtonClass: "btn btn-success",
                 type: "success"
             });
+            DescargarPDF("PREINSCRIPCION", result.objeto);
         }
         else
         {

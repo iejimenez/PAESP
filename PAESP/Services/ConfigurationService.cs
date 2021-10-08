@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PAESP.Datos;
 using PAESP.DTOS;
 using PAESP.Models;
@@ -37,7 +38,13 @@ namespace PAESP.Services
             _mapper = mapper;
         }
 
-      
+        public Recibo GetRecibo(int id)
+        {
+            Recibo rec = _context.Recibos
+                .Include(w => w.Concepto)
+                .FirstOrDefault(f => f.IdRecibo == id);
+            return rec;
+        }
     }
 
 }

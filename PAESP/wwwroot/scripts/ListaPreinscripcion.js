@@ -71,9 +71,7 @@ class InferfazPreinscripcion {
                 item.cedula,
                 '',
                 item.ciudad,
-                '',
-                '',
-                ''
+                item.telefono,            
             ]).draw(false)
         }
     }

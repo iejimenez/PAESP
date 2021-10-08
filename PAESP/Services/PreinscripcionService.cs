@@ -35,9 +35,9 @@ namespace PAESP.Services
 
         }
 
-        public bool SavePreinscripcion(Preinscripcion pre, int idConcepto)
+        public AjaxData SavePreinscripcion(Preinscripcion pre, int idConcepto)
         {
-            bool result = false;
+            AjaxData result = new AjaxData();
             using var transaction = _context.Database.BeginTransaction();
             try
             {
@@ -67,11 +67,14 @@ namespace PAESP.Services
                 _context.SaveChanges();
 
                 transaction.Commit();
+
+                result.Objeto = recibo.IdRecibo;
+                result.Is_Error = false;
             }
             catch (Exception ex)
             {
                 transaction.Rollback();
-                result = true;
+                result.Is_Error = true;
             }
 
             return result;

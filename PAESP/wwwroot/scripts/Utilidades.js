@@ -56,3 +56,9 @@ function Get_Meses(Num, Id) {
     $('#' + Id).val("");
     $('#' + Id).select2();
 }
+
+
+function DescargarPDF(tipo, id) {
+    var formURL = '/report/generate?tipo=' + tipo + "&Id=" + id;
+    window.open(formURL, "_black");
+}

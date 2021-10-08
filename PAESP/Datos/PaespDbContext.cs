@@ -27,13 +27,21 @@ namespace PAESP.Datos
         public DbSet<Configuraciones> configuraciones { get; set; }
         public DbSet<Estado> Estados { get; set; }
 
-        public DbSet<Estudiante> Estudiantes {get;set;}
+        public DbSet<Estudiante> Estudiantes { get; set; }
+
+        public DbSet<Profesor> Profesores { get; set; }
+
+        public DbSet<Grupo> Grupos { get; set; }
+
+        public DbSet<Aula> Aulas { get; set; }
+
+        public DbSet<GrupoAula> GrupoAulas { get; set; }
+
+        public DbSet<GrupoEstudiante> GrupoEstudiantes { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-
             modelBuilder.Entity<Concepto>(entity => {
                 entity.HasKey(e => e.IdConcepto);
             });
@@ -52,7 +60,7 @@ namespace PAESP.Datos
 
             modelBuilder.Entity<Preinscripcion>(entity => {
                 entity.HasKey(e => e.IdPresinscripcion);
-           
+
             });
 
             modelBuilder.Entity<Configuraciones>(entity => {
@@ -80,24 +88,34 @@ namespace PAESP.Datos
 
             modelBuilder.Entity<GrupoEstudiante>()
                 .HasOne<Grupo>()
-                .WithMany(e=>e.Estudiantes)
+                .WithMany(e => e.Estudiantes)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<GrupoEstudiante>()
                 .HasOne<Estudiante>()
                 .WithMany(g => g.Grupos)
                 .OnDelete(DeleteBehavior.Restrict);
-            
-            
+
+
             modelBuilder.Entity<Estudiante>()
                 .HasMany<GrupoEstudiante>()
-                .WithOne(e=>e.Estudiante)
+                .WithOne(e => e.Estudiante)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Grupo>()
                .HasMany<GrupoEstudiante>()
-               .WithOne(g=>g.Grupo)
+               .WithOne(g => g.Grupo)
                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Materia>()
+                .HasMany<Grupo>()
+                .WithOne(g => g.Materia)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Grupo>()
+                .HasOne<Materia>()
+                .WithMany(g => g.Grupos)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public Usuario GetUser(string user, string pass)
@@ -105,5 +123,17 @@ namespace PAESP.Datos
             Usuario userResult = this.Usuarios.Where(u => u.Cedula == user && u.Contraseña == pass).FirstOrDefault();
             return userResult;
         }
+
+        public Profesor GetProfesorByIdUser (int iduser)
+        {
+            return this.Profesores.Where(p => p.IdUsuario == iduser).FirstOrDefault();
+        }
+
+        public List<Grupo> GetGruposByProfesor(int idprofesor)
+        {
+            List<Grupo> grupos = this.Grupos.Where(g=>g.IdProfesor == idprofesor).ToList();
+
+            return grupos;
+        } 
     }
 }

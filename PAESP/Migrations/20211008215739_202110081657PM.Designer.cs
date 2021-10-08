@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PAESP.Datos;
 
 namespace PAESP.Migrations
 {
     [DbContext(typeof(PaespDbContext))]
-    partial class PaespDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211008215739_202110081657PM")]
+    partial class _202110081657PM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

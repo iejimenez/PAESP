@@ -21,6 +21,8 @@ namespace PAESP.Models
 
         public int Creditos { get; set; }
 
+        public ICollection<Grupo> Grupos { get; set; }
+
         public ICollection<ProgramaMateria> Programas { get; set; }
     }
 }

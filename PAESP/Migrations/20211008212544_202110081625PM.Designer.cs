@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PAESP.Datos;
 
 namespace PAESP.Migrations
 {
     [DbContext(typeof(PaespDbContext))]
-    partial class PaespDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211008212544_202110081625PM")]
+    partial class _202110081625PM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,9 +150,6 @@ namespace PAESP.Migrations
                     b.Property<int>("IdProfesor")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MateriaIdMateria")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -160,8 +159,6 @@ namespace PAESP.Migrations
                     b.HasIndex("IdMateria");
 
                     b.HasIndex("IdProfesor");
-
-                    b.HasIndex("MateriaIdMateria");
 
                     b.ToTable("Grupos");
                 });
@@ -471,7 +468,7 @@ namespace PAESP.Migrations
                     b.HasOne("PAESP.Models.Materia", "Materia")
                         .WithMany()
                         .HasForeignKey("IdMateria")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PAESP.Models.Profesor", "Profesor")
@@ -479,11 +476,6 @@ namespace PAESP.Migrations
                         .HasForeignKey("IdProfesor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("PAESP.Models.Materia", null)
-                        .WithMany("Grupos")
-                        .HasForeignKey("MateriaIdMateria")
-                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Materia");
 
@@ -607,8 +599,6 @@ namespace PAESP.Migrations
 
             modelBuilder.Entity("PAESP.Models.Materia", b =>
                 {
-                    b.Navigation("Grupos");
-
                     b.Navigation("Programas");
                 });
 

@@ -211,3 +211,100 @@ function CloseLoading(onlypetition) {
             Swal.close();
     }
 }
+
+
+function RenderTable(id, ncol, anchoColum, parametros, orden, checkColorClass) {
+
+    $.extend($.fn.dataTable.defaults, {
+        columnDefs: [{
+            targets: ncol,
+            orderable: false
+        }],
+        "columns": anchoColum,
+        autoWidth: false,
+        "ordering": false,
+        "bSort": false,
+        order: orden,
+        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+        language: {
+            search: '_INPUT_',
+            lengthMenu: '_MENU_',
+            paginate: {
+                first: 'Primero',
+                last: 'Último',
+                next: '&rarr;',
+                previous: '&larr;'
+            },
+
+            zeroRecords: "No se encontraron resultados",
+            emptyTable: "Ningún dato disponible en esta tabla",
+            info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            infoEmpty: "Ningún dato disponible",
+
+            infoFiltered: "(filtrado de un total de _MAX_ registros)",
+            infoPostFix: "",
+            infoThousands: ",",
+            loadingRecords: "Cargando...",
+            aria: {
+                sortAscending: ": Activar para ordenar la columna de manera ascendente",
+                sortDescending: ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    });
+
+    if (parametros != null && parametros != undefined) {
+        $('#' + id).DataTable(parametros);
+    } else {
+        // Basic datatable
+        $('#' + id).DataTable();
+    }
+
+    //// Alternative pagination
+    //$('.datatable-pagination').DataTable({
+    //    pagingType: "simple",
+    //    language: {
+    //        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+    //    }
+    //});
+
+
+    // Datatable with saving state
+    $('.datatable-save-state').DataTable({
+        stateSave: true
+    });
+
+
+    // Scrollable datatable
+    $('.datatable-scroll-y').DataTable({
+        autoWidth: true,
+        scrollY: 300
+    });
+
+    // External table additions
+    // ------------------------------
+
+    // Add placeholder to the datatable filter option
+    $('.dataTables_filter input[type=search]').attr('placeholder', 'Filtro...');
+    $('.dataTables_filter input[type=search]').addClass("form-control");
+
+    // Enable Select2 select for the length option
+    $('.dataTables_length select').select2({
+        minimumResultsForSearch: Infinity,
+        width: 'auto'
+    });
+
+    if (checkColorClass == undefined) {
+        $("#" + id).on('draw.dt', function () {
+            $(".styled").uniform({
+                radioClass: 'choice'
+            });
+        });
+    } else {
+        $("#" + id).on('draw.dt', function () {
+            $(".styled").uniform({
+                radioClass: 'choice',
+                wrapperClass: checkColorClass
+            });
+        });
+    }
+}

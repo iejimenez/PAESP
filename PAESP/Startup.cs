@@ -34,8 +34,16 @@ namespace PAESP
             services.AddRazorPages().AddRazorRuntimeCompilation();
             string conexion = Encoding.UTF8.GetString(Convert.FromBase64String(Configuration.GetConnectionString("PAESPConexion")));
             services.AddDbContext<PaespDbContext>(options => options.UseSqlServer(conexion));
-            services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddControllersWithViews();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ConceptoService>();
             services.AddTransient<ConfigurationService>();
@@ -58,7 +66,7 @@ namespace PAESP
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

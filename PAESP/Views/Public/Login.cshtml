@@ -20,12 +20,22 @@
     <!-- /global stylesheets -->
     <!-- Core JS files -->
     <script src="~/js/main/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
     <script src="~/js/main/bootstrap.bundle.min.js"></script>
     <!-- /core JS files -->
+    <script src="~/lib/jquery-validation/dist/messageEs.js"></script>
+    <script src="~/js/plugins/notifications/sweet_alert.min.js"></script>
     <!-- Theme JS files -->
     <script src="assets/js/app.js"></script>
     <!-- /theme JS files -->
-
+    <script src="~/scripts/Utilidades.js"></script>
+    <script type="module">
+        import LoginView from './scripts/login.js'
+        $(document).ready(() => {
+            const loginView = new LoginView();
+        });
+    </script>
 </head>
 
 <body>
@@ -33,35 +43,35 @@
         <div class="content-wrapper">
             <div class="content-inner">
                 <div class="content d-flex justify-content-center align-items-center">
-                    <form class="login-form" action="index.html">
+                    <form class="login-form" id="login-form">
                         <div class="card mb-0">
                             <div class="card-body">
                                 <div class="text-center mb-3">
                                     <i class="icon-reading icon-2x text-secondary border-secondary border-3 rounded-pill p-3 mb-3 mt-1"></i>
-                                    <h5 class="mb-0">Login to your account</h5>
-                                    <span class="d-block text-muted">Enter your credentials below</span>
+                                    <h5 class="mb-0">Login</h5>
+                                    <span class="d-block text-muted">Ingresa tus credenciales aquí</span>
                                 </div>
 
                                 <div class="form-group form-group-feedback form-group-feedback-left">
-                                    <input type="text" class="form-control" placeholder="Username">
+                                    <input type="text" id="txtUsuario" name="user" data-model="login" class="form-control change" placeholder="Usuario">
                                     <div class="form-control-feedback">
                                         <i class="icon-user text-muted"></i>
                                     </div>
                                 </div>
 
                                 <div class="form-group form-group-feedback form-group-feedback-left">
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input type="password" id="txtPassword" name="pass" data-model="login" class="form-control change" placeholder="Password">
                                     <div class="form-control-feedback">
                                         <i class="icon-lock2 text-muted"></i>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                    <button type="button" id="btnLogin" class="btn btn-primary btn-block">Entrar</button>
                                 </div>
 
                                 <div class="text-center">
-                                    <a href="login_password_recover.html">Forgot password?</a>
+                                    <a href="login_password_recover.html">¿Olvidaste tu contraseña?</a>
                                 </div>
                             </div>
                         </div>

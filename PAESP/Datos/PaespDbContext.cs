@@ -94,5 +94,11 @@ namespace PAESP.Datos
                .WithOne(g=>g.Grupo)
                .OnDelete(DeleteBehavior.Restrict);
         }
+
+        public Usuario GetUser(string user, string pass)
+        {
+            Usuario userResult = this.Usuarios.Where(u => u.Cedula == user && u.Contraseña == pass).FirstOrDefault();
+            return userResult;
+        }
     }
 }

@@ -308,3 +308,88 @@ function RenderTable(id, ncol, anchoColum, parametros, orden, checkColorClass) {
         });
     }
 }
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+var lastFocusedItem = null;
+function soloNumerosYDecimal(e, replaceComma, decimals) {
+    key = e.keyCode || e.which;
+    if (key == 13) {
+        e.preventDefault();
+        const inputs = $(':input')
+        const nextInput = inputs.get(inputs.index(e.target) + 1);
+        if (nextInput) {
+            lastFocusedItem = nextInput.id;
+            nextInput.focus();
+        }
+        return true;
+    }
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = "0123456789.,";
+    especiales = "8-37-39-46";
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (replaceComma && key == "46") {
+        e.preventDefault();
+        if (!decimals)
+            decimals = 0;
+        const valorActual = $(e.target).val();
+        const cursorPosition = e.target.selectionStart;
+        $(e.target).val(valorActual.substring(0, cursorPosition).replace(/[^0123456789]/g, '') + "," + valorActual.substring(cursorPosition, valorActual.length).replace(/[^0123456789]/g, '').substring(0, decimals));
+        if (cursorPosition != 0 && cursorPosition != valorActual.length) {
+            $(e.target).trigger("change");
+            $(e.target).focus();
+        }
+        return false;
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
+
+
+function FormatoConPuntosSinRed(num, decimals) {
+    var op = true;
+    let originalNum = num;
+    const isInteger = Number.isInteger(num);
+    num = num == "" ? "0" : typeof (num) == 'string' ? num : num.toFixed(decimals ? decimals : 0);
+    num = num.replace(/[.,]/gi, "");
+    if (!isNaN(num)) {
+        if (num < 0) {
+            op = false;
+            num = num * -1;
+        }
+        let decimalsVal = '';
+        if (decimals) {
+            originalNum = originalNum.toFixed(decimals) * 1;
+            num = originalNum.toString();
+            const decimalPart = originalNum.toString().split('.')[1];
+            const integerPart = originalNum.toString().split('.')[0];
+            const countDecimals = decimalPart ? decimalPart.length : 2;
+            const numString = countDecimals < 2 ? originalNum.toString() + "0" : originalNum.toString();
+            decimalsVal = isInteger ? ",00" : numString.length < 2 ? ',' + numString : ',' + numString.substring(numString.length - decimals, numString.length);
+            num = isInteger ? num : num.toString().length < decimals ? 0 : integerPart;
+        }
+        num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        num = num.split('').reverse().join('').replace(/^[\.]/, '') + decimalsVal;
+        return op ? num : "-" + num;
+    } else {
+        num = "0";
+        num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        return num;
+    }
+}

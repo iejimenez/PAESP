@@ -144,22 +144,39 @@ namespace PAESP.Datos
             return userResult;
         }
 
-        public Profesor GetProfesorByIdUser (int iduser)
+        public Profesor GetProfesorByIdUser(int iduser)
         {
             return this.Profesores.Where(p => p.IdUsuario == iduser).FirstOrDefault();
         }
 
         public List<Grupo> GetGruposByProfesor(int idprofesor)
         {
-            List<Grupo> grupos = this.Grupos.Where(g=>g.IdProfesor == idprofesor).ToList();
+            List<Grupo> grupos = this.Grupos.Where(g => g.IdProfesor == idprofesor).ToList();
 
             return grupos;
-        } 
+        }
 
         public Materia GetMateria(int idmateria)
         {
             Materia materia = this.Materias.Where(m => m.IdMateria == idmateria).FirstOrDefault();
             return materia;
+        }
+
+        public Estudiante GetEstudianteById(int idestudiante)
+        {
+            Estudiante est = this.Estudiantes.Where(m => m.IdEstudiante == idestudiante).FirstOrDefault();
+            if(est!= null)
+            {
+                est.Usuario = this.Usuarios.Where(u => u.IdUsuario == est.IdUsuario).FirstOrDefault();
+            }
+            return est;
+        }
+
+
+        public List<GrupoEstudiante> GetEstudiantesDeGrupo(int idgrupo)
+        {
+            List<GrupoEstudiante> estudiantes = this.GrupoEstudiantes.Where(g => g.IdGrupo == idgrupo).ToList();
+            return estudiantes;
         }
     }
 }

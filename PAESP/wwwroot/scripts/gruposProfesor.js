@@ -2,6 +2,7 @@
     constructor() {
         this.getCursos = this.getCursos.bind(this);
         this.renderTableCursos = this.renderTableCursos.bind(this);
+        this.clickEditarNotas = this.clickEditarNotas.bind(this);
         this._initHtml()
         this._initConstants()
         this._initEventBindings();
@@ -45,23 +46,10 @@
         this.renderTableCursos();
     }
 
-    async clickEditarNotas() {
-        //if (this.formValidator[this.LOGIN_FORM].form()) {
-        //    ShowLoading(true);
-        //    const result = await this.postAutenticate();
-        //    CloseLoading();
-        //    if (!result.Is_Error) {
-        //        window.location.href = '/Home/Index';
-        //    } else {
-        //        swal.fire({
-        //            title: "¡Error!",
-        //            text: result.Msj,
-        //            confirmButtonColor: "#66BB6A",
-        //            type: "error"
-        //        });
-        //    }
-
-        //}
+    async clickEditarNotas(event) {
+        const idx = $(event.target).data("idx") * 1;
+        const id = this.grupos[idx].idGrupo;
+        window.location.href = '/Nota/Index?idgrupo=' + id;
     }
 
     renderTableCursos() {

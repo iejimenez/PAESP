@@ -229,19 +229,30 @@
     <div class="navbar navbar-expand navbar-light px-0 px-lg-3">
         <div class="overflow-auto overflow-lg-visible scrollbar-hidden flex-1">
             <ul class="navbar-nav flex-row text-nowrap">
-                <li class="nav-item">
-                    <a href="/" class="navbar-nav-link active">
-                        <i class="icon-home4 mr-2"></i>
-                        Home
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="/GrupoProfesor/Index" class="navbar-nav-link active">
-                        <i class="icon-archive mr-2"></i>
-                        Grupos
-                    </a>
-                </li>
+                @if (ViewBag.Admin == false)
+                {
+                    <li class="nav-item">
+                        <a href="/" class="navbar-nav-link active">
+                            <i class="icon-home4 mr-2"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/GrupoProfesor/Index" class="navbar-nav-link">
+                            <i class="icon-archive mr-2"></i>
+                            Grupos
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a href="/Preinscripcion/Index" class="navbar-nav-link">
+                            <i class="icon-archive mr-2"></i>
+                            Recibos
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
     </div>

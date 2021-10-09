@@ -54,12 +54,12 @@
             ShowLoading(true);
             const result = await this.postAutenticate();
             CloseLoading();
-            if (!result.Is_Error) {
+            if (!result.is_Error) {
                 window.location.href = '/Home/Index';
             } else {
                 swal.fire({
                     title: "¡Error!",
-                    text: result.Msj,
+                    text: result.msj,
                     confirmButtonColor: "#66BB6A",
                     type: "error"
                 });

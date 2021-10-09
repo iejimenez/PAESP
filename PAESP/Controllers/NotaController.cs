@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PAESP.Clases;
 using PAESP.Datos;
 using PAESP.DTOS;
@@ -23,6 +25,9 @@ namespace PAESP.Controllers
 
         public IActionResult Index()
         {
+            UsuarioDto user = JsonConvert.DeserializeObject<UsuarioDto>(HttpContext.Session.GetString("User"));
+            ViewBag.Nombre = user.Nombres;
+            ViewBag.Admin = user.Cedula == "123456";
             return View();
         }
 

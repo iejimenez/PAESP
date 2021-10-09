@@ -65,19 +65,19 @@
             {
                 data: 'idGrupoEstudiante', className: "dt-center", render: (data, type, row, meta) => {
 
-                    return "<input onkeypress='return soloNumerosYDecimal(event)' data-corte='2' data-idx='" + meta.row + "' id='estSc_" + data + "' class='form-control EditNotas border-0' type='text' value='" + row.segundoCorte + "' /> "
+                    return "<input readonly='true' onkeypress='return soloNumerosYDecimal(event)' data-corte='2' data-idx='" + meta.row + "' id='estSc_" + data + "' class='form-control EditNotas border-0' type='text' value='" + row.segundoCorte + "' /> "
                 }
             },
             {
                 data: 'idGrupoEstudiante', className: "dt-center", render: (data, type, row, meta) => {
 
-                    return "<input onkeypress='return soloNumerosYDecimal(event)' data-corte='3' data-idx='" + meta.row + "' id='estTc_" + data + "' class='form-control EditNotas border-0' type='text' value='" + row.tercerCorte + "' /> "
+                    return "<input readonly='true' onkeypress='return soloNumerosYDecimal(event)' data-corte='3' data-idx='" + meta.row + "' id='estTc_" + data + "' class='form-control EditNotas border-0' type='text' value='" + row.tercerCorte + "' /> "
                 }
             },
             {
                 data: 'idGrupoEstudiante', className: "dt-center", render: (data, type, row, meta) => {
 
-                    return "<input onkeypress='return soloNumerosYDecimal(event)' data-corte='4' data-idx='"+meta.row+"' id='estPonderado" + meta.row + "' readonly class='form-control border-0' type='text' value='" + row.ponderado + "' /> "
+                    return "<input readonly='true' onkeypress='return soloNumerosYDecimal(event)' data-corte='4' data-idx='"+meta.row+"' id='estPonderado" + meta.row + "' readonly class='form-control border-0' type='text' value='" + row.ponderado + "' /> "
                 }
             },
             {

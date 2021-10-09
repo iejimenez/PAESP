@@ -25,6 +25,9 @@ namespace PAESP.Controllers
 
         public IActionResult Index()
         {
+            UsuarioDto user = JsonConvert.DeserializeObject<UsuarioDto>(HttpContext.Session.GetString("User"));
+            ViewBag.Nombre = user.Nombres;
+            ViewBag.Admin = user.Cedula == "123456";
             return View();
         }
 
